@@ -43,7 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SamsTarCS\SamsTarCS.csproj">
-      <Project>{F4DA231E-25C3-4D6E-99FB-1C9ADD129900}</Project>
+      <Project>{f4da231e-25c3-4d6e-99fb-1c9add129900}</Project>
       <Name>SamsTarCS</Name>
     </ProjectReference>
   </ItemGroup>

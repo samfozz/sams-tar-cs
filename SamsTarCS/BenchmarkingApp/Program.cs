@@ -25,12 +25,17 @@ namespace BenchmarkingApp
             
             foreach (var testFile in _testDataDir.GetFiles("*.tgz"))
             {
+             
+
                 sw.Reset();
                 sw.Start();
                 
                 for (int i = 0; i < testRuns; i++)
                 {
-                    
+                    createdDirs = new HashSet<string>();
+
+                    dirsCreated = filesCreated = 0;
+
                     var testOutDir = tmpDir.CreateSubdirectory(testFile.Name.Replace(".", "_")+"__"+i);
                 
                     using (var tarStream = new GZipStream(File.OpenRead(testFile.FullName), CompressionMode.Decompress))
@@ -46,12 +51,20 @@ namespace BenchmarkingApp
                         }
                         
                     }
+
+
+                    Console.WriteLine($"\tTo unpack '{testFile.Name}' took '{sw.Elapsed}' - {filesCreated} files & {dirsCreated} dirs created.");
                 }
                 
                 Console.WriteLine($"To unpack '{testFile.Name}' {testRuns} times took '{sw.Elapsed}' - avg - '{sw.Elapsed.TotalMinutes / testRuns} mins per go.'");
             }
+
+
+
             Directory.Delete(tmpDir.FullName, true);
 
+
+            Console.ReadKey(true);
         }
                 
         static DirectoryInfo _testDataDir = new DirectoryInfo("../../../../TestData");
@@ -59,6 +72,12 @@ namespace BenchmarkingApp
         
         
         static HashSet<string> createdDirs = new HashSet<string>();
+
+
+        private static int dirsCreated = 0;
+        private static int filesCreated = 0;
+
+
 
         private static void ExtractTarEntry(TarReader tarReader, string outputDirectory, string packName)
         {
@@ -88,12 +107,14 @@ namespace BenchmarkingApp
 
                     if (!createdDirs.Contains(file.DirectoryName))
                     {
+                        dirsCreated++;
                         file.Directory.Create();
                         createdDirs.Add(file.DirectoryName);
                     }
 
                     using (var outputStream = File.Create(fullPath))
                     {
+                        filesCreated++;
                         // Read data from a current file to a Stream.
                         tarReader.Read(outputStream);
                     }
