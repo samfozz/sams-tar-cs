@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SamsTarCS", "SamsTarCS\SamsTarCS.csproj", "{F4DA231E-25C3-4D6E-99FB-1C9ADD129900}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{D6887BFC-354D-4C4A-B229-9F044D8BADBC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BenchmarkingApp", "BenchmarkingApp\BenchmarkingApp.csproj", "{51403E79-99D3-490C-835A-3BB8441CA6CD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F4DA231E-25C3-4D6E-99FB-1C9ADD129900}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4DA231E-25C3-4D6E-99FB-1C9ADD129900}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4DA231E-25C3-4D6E-99FB-1C9ADD129900}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4DA231E-25C3-4D6E-99FB-1C9ADD129900}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D6887BFC-354D-4C4A-B229-9F044D8BADBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6887BFC-354D-4C4A-B229-9F044D8BADBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6887BFC-354D-4C4A-B229-9F044D8BADBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6887BFC-354D-4C4A-B229-9F044D8BADBC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51403E79-99D3-490C-835A-3BB8441CA6CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51403E79-99D3-490C-835A-3BB8441CA6CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51403E79-99D3-490C-835A-3BB8441CA6CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51403E79-99D3-490C-835A-3BB8441CA6CD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
