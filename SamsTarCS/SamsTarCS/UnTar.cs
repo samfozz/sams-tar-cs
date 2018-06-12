@@ -22,7 +22,7 @@ namespace SamsTarCS
                 smallFileSize = -1;
             }
 
-            if (smallFileSize > smallFileQueue.MaxSize)
+            if (smallFileSize > smallFileQueue?.MaxSize)
             {
                 throw new ArgumentException("'smallFileSize' should not be greater than 'smallFileQueue.MaxSize'");
             }

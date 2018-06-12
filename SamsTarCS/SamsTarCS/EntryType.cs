@@ -1,6 +1,6 @@
 namespace SamsTarCS
 {
-    public enum EntryType : byte
+    internal enum EntryType : byte
     {
         File = 0,
         FileObsolete = 0x30,

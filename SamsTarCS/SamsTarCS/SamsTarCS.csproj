@@ -4,6 +4,10 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <RepositoryUrl>https://github.com/samfozz/sams-tar-cs</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <PackageTags>untar tar-cs</PackageTags>
+    <PackageTags>untar tar-cs tar</PackageTags>
+    <Authors>Sam Foster</Authors>
+    <Description>A tar-cs fork. Lets you unpack tar archives.</Description>
+    <AssemblyVersion>1.0.1.0</AssemblyVersion>
+    <FileVersion>1.0.1.0</FileVersion>
   </PropertyGroup>
 </Project>

@@ -2,7 +2,7 @@ using System;
 
 namespace SamsTarCS
 {
-    public interface ITarHeader
+    internal interface ITarHeader
     {
         string FileName { get; set; }
         int Mode { get; set; }

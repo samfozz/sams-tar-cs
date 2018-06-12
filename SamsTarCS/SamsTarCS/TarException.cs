@@ -2,7 +2,7 @@
 
 namespace SamsTarCS
 {
-    public class TarException : Exception
+    internal class TarException : Exception
     {
         public TarException(string message) : base(message)
         {
