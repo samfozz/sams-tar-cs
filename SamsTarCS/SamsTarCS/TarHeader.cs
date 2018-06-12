@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Net;
 using System.Text;
-using tar_cs;
 
-namespace tar_cs
+namespace SamsTarCS
 {
     internal class TarHeader : ITarHeader
     {

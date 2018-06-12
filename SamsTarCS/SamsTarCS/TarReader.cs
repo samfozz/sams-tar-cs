@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 
-namespace tar_cs
+namespace SamsTarCS
 {
     /// <summary>
     /// Extract contents of a tar file represented by a stream for the TarReader constructor
