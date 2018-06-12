@@ -90,12 +90,20 @@ namespace SamsTarCS
         /// <summary>
         /// Cancels background writing.
         /// </summary>
-        public void Stop()
+        public async Task Stop()
         {
             if (_worker != null)
             {
                 _cancellationTokenSource.Cancel();
+
+                await _worker;
+
+                _worker.Dispose();
+
+                _worker = null;
             }
+
+           
             
         }
         
@@ -186,7 +194,6 @@ namespace SamsTarCS
                 _cancellationTokenSource.Cancel();
             }
             
-            _worker?.Dispose();
             _cancellationTokenSource?.Dispose();
         }
     }

@@ -60,37 +60,44 @@ namespace Tests
             var testRuns = 2;
 
             // 1 MB buffer
-            var writeQueue = new AsyncFileWriteQueue(1 * 1024 * 1024);
-            writeQueue.Start();
-
-            var tmpDir = Directory.CreateDirectory(Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString("N")));
-
-
-            Stopwatch sw = new Stopwatch();
-
-            foreach (var testFile in _testDataDir.GetFiles("*.tgz"))
+            using (var writeQueue = new AsyncFileWriteQueue(1 * 1024 * 1024))
             {
-                sw.Reset();
-                sw.Start();
 
-                for (int i = 0; i < testRuns; i++)
+                
+                    writeQueue.Start();
+
+                var tmpDir = Directory.CreateDirectory(Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString("N")));
+
+
+                Stopwatch sw = new Stopwatch();
+
+                foreach (var testFile in _testDataDir.GetFiles("*.tgz"))
                 {
+                    sw.Reset();
+                    sw.Start();
 
-                    var testOutDir = tmpDir.CreateSubdirectory(testFile.Name.Replace(".", "_") + "__" + i);
-
-                    using (var tarStream = new GZipStream(File.OpenRead(testFile.FullName), CompressionMode.Decompress))
+                    for (int i = 0; i < testRuns; i++)
                     {
-                        UnTar.Extract(tarStream, testOutDir, writeQueue);
+
+                        var testOutDir = tmpDir.CreateSubdirectory(testFile.Name.Replace(".", "_") + "__" + i);
+
+                        using (var tarStream = new GZipStream(File.OpenRead(testFile.FullName), CompressionMode.Decompress))
+                        {
+                            UnTar.Extract(tarStream, testOutDir, writeQueue);
+                        }
                     }
+
+                    Debug.WriteLine($"To unpack '{testFile.Name}' {testRuns} times took '{sw.Elapsed}' - avg - '{sw.Elapsed / testRuns} per go.'");
                 }
 
-                Debug.WriteLine($"To unpack '{testFile.Name}' {testRuns} times took '{sw.Elapsed}' - avg - '{sw.Elapsed / testRuns} per go.'");
-            }
+                writeQueue.WaitComplete().Wait();
 
-            writeQueue.WaitComplete().Wait();
-            Assert.True(tmpDir.Exists);
-            Assert.True(tmpDir.EnumerateFileSystemInfos().Any());
-            Directory.Delete(tmpDir.FullName, true);
+                writeQueue.Stop().Wait();
+
+                Assert.True(tmpDir.Exists);
+                Assert.True(tmpDir.EnumerateFileSystemInfos().Any());
+                Directory.Delete(tmpDir.FullName, true);
+            }
         }
 
         [Fact]
