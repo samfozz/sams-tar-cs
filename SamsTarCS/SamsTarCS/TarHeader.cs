@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Net;
 using System.Text;
 
@@ -130,9 +131,15 @@ namespace SamsTarCS
             {
                 SizeInBytes = Convert.ToInt64(Encoding.ASCII.GetString(buffer, 124, 11).Trim(), 8);
             }
-            long unixTimeStamp = Convert.ToInt64(Encoding.ASCII.GetString(buffer,136,11).Trim(), 8);
-            LastModification = TheEpoch.AddSeconds(unixTimeStamp);
 
+            var timeStr = new string(Encoding.ASCII.GetString(buffer, 136, 11).Where(a=> a != char.MinValue).ToArray()).Trim();
+
+            if (!string.IsNullOrEmpty(timeStr))
+            {
+                long unixTimeStamp = Convert.ToInt64(timeStr, 8);
+                LastModification = TheEpoch.AddSeconds(unixTimeStamp);
+            }
+ 
             var storedChecksum = Convert.ToInt32(Encoding.ASCII.GetString(buffer,148,6).Trim());
             RecalculateChecksum(buffer);
             if (storedChecksum == headerChecksum)
